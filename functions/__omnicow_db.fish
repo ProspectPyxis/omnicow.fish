@@ -27,5 +27,6 @@ function __omnicow_db_help
         'Subcommands:' \
         '  gen, generate  Generate or regenerate cowfile database' \
         '  rm             Delete cowfile database' \
-        '  get            Query the cowfile database'
+        '  get            Query the cowfile database' \
+        '  list           List all cowfiles that fulfill certain conditions'
 end
