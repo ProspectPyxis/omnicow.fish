@@ -12,7 +12,7 @@ function __omnicow_db_get
         if test $argv[1] = all_files
             # Special case: get list of every file
             grep -m 1 '^allfiles,' $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename \
-                | awk -F',' '{for (i=2; i<=NF; i++) printf "%s ", $i}' | string trim
+                | awk -F',' '{$1 = ""; print $0}' | string trim
             return
         end
 
