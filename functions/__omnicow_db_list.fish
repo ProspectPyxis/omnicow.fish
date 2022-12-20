@@ -28,7 +28,7 @@ function __omnicow_db_list
     set --query _flag_max_height
     and set max_height_condition ' && $5 <= '$_flag_max_height
 
-    awk -F',' "\$1 == \"cowfile\"$max_width_condition$max_height_condition {print \$2}" "$omnicow_db_path/$omnicow_db_filename"
+    awk -F',' -v c=1 "\$1 == \"cowfile\"$max_width_condition$max_height_condition {c=0; print \$2} END {exit c}" "$omnicow_db_path/$omnicow_db_filename"
 end
 
 function __omnicow_db_list_help
