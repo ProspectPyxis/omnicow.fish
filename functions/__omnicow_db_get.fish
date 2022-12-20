@@ -1,6 +1,6 @@
 function __omnicow_db_get
     argparse --stop-nonopt h/help -- $argv
-    if set --query $_flag_help
+    if set --query _flag_help
         __omnicow_db_get_help
         return
     end
@@ -34,4 +34,30 @@ function __omnicow_db_get
         end
         printf %s\n $found_row | awk -F',' "{print \$$(math $field_index + 2)}"
     end
+end
+
+function __omnicow_db_get_help
+    printf %s\n \
+        'omnicow db get: Query the cowfile database' \
+        '' \
+        'Usage:' \
+        '  omnicow db get [VALUE]' \
+        '  omnicow db get [COWFILE] [FIELD]' \
+        '' \
+        '  If only one argument is given, it is assumed that you are trying to get a value not associated with a cowfile.' \
+        '  If two or more arguments are given, it is assumed that you are trying to get a value associated with a cowfile.' \
+        '  In the latter case, the first argument is the cowfile\'s name (.cow extension optional), and the second argument is the field to get.' \
+        '  Any further arguments are ignored.' \
+        '' \
+        'Valid values for [VALUE]:' \
+        '  all_files   Every cowfile stored in the database.' \
+        '  min_width   The minimum width of every cowfile.' \
+        '  max_width   The maximum width of every cowfile.' \
+        '  min_height  The minimum height of every cowfile.' \
+        '  max_height  The maximum height of every cowfile.' \
+        '' \
+        'Valid values for [FIELD]:' \
+        '  md5     The md5 hash of the entire cowfile, including leading comments and extra perl functions.' \
+        '  width   The width of the cow.' \
+        '  height  The height of the cow.'
 end
