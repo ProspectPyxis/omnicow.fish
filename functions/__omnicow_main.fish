@@ -52,5 +52,6 @@ function __omnicow_main
         set cow_cmd (random choice cowsay cowthink)
     end
 
+    # Moo!
     eval $cow_cmd -f (random choice $cowfiles) $argv
 end
