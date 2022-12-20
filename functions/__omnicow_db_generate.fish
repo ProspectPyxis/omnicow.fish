@@ -10,7 +10,7 @@ function __omnicow_db_generate
     end
 
     set --query COWPATH; or set -l COWPATH /usr/share/cows
-    set -l dbfile $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename
+    set -l dbfile $omnicow_db_path/$omnicow_db_filename
     if test -e $dbfile; and not set --query _flag_force; and test (__omnicow_db_get all_files) = (string join ' ' $COWPATH/*.cow)
         return 0
     end

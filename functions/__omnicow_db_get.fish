@@ -6,18 +6,18 @@ function __omnicow_db_get
     end
 
     # If database doesn't exist, create it
-    test ! -e $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename; and __omnicow_db_generate
+    test ! -e $omnicow_db_path/$omnicow_db_filename; and __omnicow_db_generate
 
     if not set --query argv[2]
         if test $argv[1] = all_files
             # Special case: get list of every file
-            grep -m 1 '^allfiles,' $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename \
+            grep -m 1 '^allfiles,' $omnicow_db_path/$omnicow_db_filename \
                 | awk -F',' '{$1 = ""; print $0}' | string trim
             return
         end
 
         # One argument; assuming trying to get non-cowfile value
-        if not set -l found_value (string match -e "value,$argv[1]" < $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename)
+        if not set -l found_value (string match -e "value,$argv[1]" < $omnicow_db_path/$omnicow_db_filename)
             printf "omnicow db get: value $argv[1] not found\n" >&2
             return 1
         end
@@ -28,7 +28,7 @@ function __omnicow_db_get
             printf "omnicow db get: no field $argv[2] in cowfile data\n" >&2
             return 1
         end
-        if not set -l found_row (string match --regex "^cowfile,.*$argv[1]" --entire < $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename)
+        if not set -l found_row (string match --regex "^cowfile,.*$argv[1]" --entire < $omnicow_db_path/$omnicow_db_filename)
             printf "omnicow db get: cowfile $argv[1] not found in the database\n" >&2
             return 1
         end

@@ -60,14 +60,13 @@ widths and heights (see [How it works](##How-it-works) below). By default, this
 file is at `$XDG_DATA_HOME/cows/omnicowdb.csv` (`$XDG_DATA_HOME` defaults to
 `~/.local/share` if not set). If you wish to store the omnicow database
 somewhere else or with another filename, you can set the variables
-`omnicow_omnicowdb_path` for its location, and `omnicow_omnicowdb_filename` for
-its filename.
+`omnicow_db_path` for its location, and `omnicow_db_filename` for its filename.
 
 ```fish
 # Just store the omnicow database in my home directory
-set omnicow_omnicowdb_path $HOME
+set omnicow_db_path $HOME
 # Make the database file hidden by adding a leading dot
-set omnicow_omnicowdb_filename '.omnicowdb.csv'
+set omnicow_db_filename '.omnicowdb.csv'
 ```
 
 ### Exclude certain cowfiles
@@ -90,7 +89,7 @@ find (`$XDG_DATA_HOME` defaults to `~/.local/share`); this is for `omnicow` to
 be able to quickly read the widths and heights of cowfiles. All subsequent runs
 of `omnicow` will read and write from this file. You can also manually set the
 location and filename of the database file by setting the variables
-`omnicow_omnicowdb_path` and `omnicow_omnicowdb_filename`, respectively (see
+`omnicow_db_path` and `omnicow_db_filename`, respectively (see
 [Settings/Omnicow database file](###Omnicow-database-file)).
 
 `omnicow` respects the `COWPATH` variable as to where it sources cowfiles from;
