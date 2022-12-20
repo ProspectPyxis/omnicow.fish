@@ -26,8 +26,9 @@ function __omnicow_db_generate
         set -l parsed_cow (awk '/^\$the_cow.*EOC/{flag=1; next} /^EOC$/{flag=0} flag' $cowfile \
             | string replace --all '\'' '\\\'' | string replace --all '"' '\\"' | string unescape \
             | string replace --all '$thoughts' '\\' | string replace --all '$tongue' '  ')
-        # TODO: Parse cowfiles with eye width != 2
-        set parsed_cow (string replace --all --regex '\$eyes|\$\{eyes\}' 'oo' $parsed_cow)
+
+        set -l eyestring (perl -le '$eyes="oo";do "'$cowfile'";print $eyes;')
+        set parsed_cow (string replace --all --regex '\$eyes|\$\{eyes\}' $eyestring $parsed_cow)
 
         set -l width (printf "%s\n" $parsed_cow | wc -L)
         set -l height (printf "%s\n" $parsed_cow | wc -l)
