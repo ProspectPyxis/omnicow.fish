@@ -21,11 +21,13 @@ function __omnicow_db_list
     end
 
     set -l max_width_condition ''
-    set --query _flag_max_width
+    set --query _flag_max_width[1]
+    and test $_flag_max_width -ne 0
     and set max_width_condition ' && $4 <= '$_flag_max_width
 
     set -l max_height_condition ''
-    set --query _flag_max_height
+    set --query _flag_max_height[1]
+    and test $_flag_max_height -ne 0
     and set max_height_condition ' && $5 <= '$_flag_max_height
 
     awk -F',' -v c=1 "\$1 == \"cowfile\"$max_width_condition$max_height_condition {c=0; print \$2} END {exit c}" "$omnicow_db_path/$omnicow_db_filename"
@@ -38,7 +40,7 @@ function __omnicow_db_list_help
         'Usage: omnicow db list [OPTIONS]' \
         '' \
         'Options:' \
-        '  --max-width <MAX_WIDTH>    The maximum allowed width of a cow (inclusive)' \
-        '  --max-height <MAX_HEIGHT>  The maximum allowed height of a cow (inclusive)' \
+        '  --max-width <MAX_WIDTH>    The maximum allowed width of a cow (inclusive). 0 means no limit.' \
+        '  --max-height <MAX_HEIGHT>  The maximum allowed height of a cow (inclusive). 0 means no limit.' \
         '  -h, --help                 Print help information'
 end

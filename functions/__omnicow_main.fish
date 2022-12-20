@@ -35,11 +35,12 @@ function __omnicow_main
     set argv (string split --no-empty -- ' ' $argv)
 
     # List valid cowfiles
-    set -l cowfiles
-    if set --query _flag_no_exclude
-        set cowfiles $COWPATH/*.cow
-    else
-        set cowfiles (string match --invert --all --regex (string join '|' $omnicow_exclude_cowfiles) $COWPATH/*.cow)
+    set --query _flag_max_width[1]; or set -l _flag_max_width 0
+    set --query _flag_max_height[1]; or set -l _flag_max_height 0
+
+    set -l cowfiles (__omnicow_db_list --max-width $_flag_max_width --max-height $_flag_max_height)
+    if not set --query _flag_no_exclude
+        set cowfiles (string match --invert --all --regex (string join '|' $omnicow_exclude_cowfiles) $cowfiles)
     end
 
     # Pick a command
