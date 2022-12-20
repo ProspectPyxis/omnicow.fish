@@ -95,7 +95,7 @@ location and filename of the database file by setting the variables
 
 `omnicow` respects the `COWPATH` variable as to where it sources cowfiles from;
 however, unlike the base `cowsay` command, this variable does not need to be
-exported.
+exported. If `COWPATH` is unset, `omnicow` will read from `/usr/share/cows`.
 
 On subsequent runs, `omnicow` will check if any cowfiles have been added or
 removed, and regenerate the database file if necessary. Note that it does _not_
