@@ -1,0 +1,30 @@
+function __omnicow_db_get
+    argparse --stop-nonopt h/help -- $argv
+    if set --query $_flag_help
+        __omnicow_db_get_help
+        return
+    end
+
+    # Generate database first, so we're not fetching a nonexistent file
+    __omnicow_db_generate
+
+    if not set --query argv[2]
+        # One argument; assuming trying to get non-cowfile value
+        if not set -l found_value (string match -e "value;$argv[1]" < $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename)
+            printf "omnicow db get: value $argv[1] not found\n" >&2
+            return 1
+        end
+        printf %s\n $found_value | awk -F',' '{print $3}'
+    else
+        # More than one argument; assuming trying to get cowfile value
+        if not set -l field_index (contains --index $argv[2] md5 width height)
+            printf "omnicow db get: no field $argv[2] in cowfile data\n" >&2
+            return 1
+        end
+        if not set -l found_row (string match --regex "^cowfile;.*$argv[1]" --entire < $omnicow_omnicowdb_path/$omnicow_omnicowdb_filename)
+            printf "omnicow db get: cowfile $argv[1] not found in the database\n" >&2
+            return 1
+        end
+        printf %s\n $found_row | awk -F',' "{print \$$(math $field_index + 2)}"
+    end
+end
