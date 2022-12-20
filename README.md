@@ -15,6 +15,9 @@ including random facial expressions and eyes.
   - The version installed by your package manager should work, but the latest
     release from [this fork](https://github.com/cowsay-org/cowsay) is
     recommended.
+- Perl 5
+  - Perl is already a dependency for cowsay, but it's also explicitly mentioned
+    here for clarity, since `perl` is also directly used in some functions.
 
 Install with [Fisher](https://github.com/jorgebucaran/fisher) (recommended):
 
