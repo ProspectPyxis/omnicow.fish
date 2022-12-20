@@ -12,7 +12,7 @@ end
 function __omnicow_help
     printf %s\n \
         'Usage:' \
-        '  omnicow [OPTIONS...]' \
+        '  omnicow [OPTIONS]' \
         '  omnicow [SUBCOMMAND]' \
         '' \
         'Options (all options from cowsay are also valid):' \
