@@ -27,6 +27,8 @@ function __omnicow_db_generate
             | string replace --all '\'' '\\\'' | string replace --all '"' '\\"' | string unescape \
             | string replace --all '$thoughts' '\\' | string replace --all '$tongue' '  ')
 
+        # This runs the cowfile and checks the resulting eyes,
+        # so that we know how wide to make the eyes
         set -l eyestring (perl -le '$eyes="oo";do "'$cowfile'";print $eyes;')
         set parsed_cow (string replace --all --regex '\$eyes|\$\{eyes\}' $eyestring $parsed_cow)
 
