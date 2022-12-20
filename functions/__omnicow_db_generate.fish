@@ -1,5 +1,6 @@
 function __omnicow_db_generate
-    if not argparse --name="omnicow db generate" h/help f/force -- $argv
+    argparse --name="omnicow db generate" h/help f/force -- $argv
+    or begin
         __omnicow_db_generate_help
         return 1
     end

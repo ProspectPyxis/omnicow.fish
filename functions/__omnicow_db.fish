@@ -2,11 +2,11 @@ function __omnicow_db
     argparse --stop-nonopt h/help -- $argv
     if set --query _flag_help
         __omnicow_db_help
-    else if not set --query $argv[1]
+    else if not set --query argv[1]
         __omnicow_db_help
         return 1
     else if test $argv[1] = generate -o $argv[1] = gen
-        __omnicow_db_generate
+        __omnicow_db_generate $argv[2..]
     else if functions --query __omnicow_db_$argv[1]
         __omnicow_db_$argv[1] $argv[2..]
     else
