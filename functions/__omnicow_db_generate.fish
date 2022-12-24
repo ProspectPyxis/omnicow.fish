@@ -23,7 +23,7 @@ function __omnicow_db_generate
     printf "allfiles,%s\n" (string join ',' $COWPATH/*.cow) >$dbfile
     for cowfile in $COWPATH/*.cow
         set -l cowfile_md5 (md5sum $cowfile | awk '{print $1}')
-        set -l parsed_cow (perl -le '$eyes="oo";$thoughts="\\\\";$tongue="  ";do "'$cowfile'";chomp($the_cow);print $the_cow;')
+        set -l parsed_cow (perl -le 'use Text::Tabs;$eyes="oo";$thoughts="\\\\";$tongue="  ";do "'$cowfile'";chomp($the_cow);print expand $the_cow;')
 
         set -l width (printf "%s\n" $parsed_cow | wc -L)
         set -l height (printf "%s\n" $parsed_cow | wc -l)
