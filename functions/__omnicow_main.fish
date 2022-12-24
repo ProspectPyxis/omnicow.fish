@@ -55,7 +55,7 @@ function __omnicow_main
     end
 
     # Pick an eye
-    set -l eyes (random choice 'default' 'oo' '==' 'xx' 'XX' '$$' '@@' '**' '--' 'OO' '..' '^^' 'uu' 'ºº' '00')
+    set -l eyes (random choice 'default' 'oo' '==' 'xx' 'XX' '$$' '@@' '**' '--' 'OO' '..' '^^' 'uu' '00')
     set -l eye_cmd ""
     if not set --query _flag_default_eyes; and test $eyes != default
         set eye_cmd " -e '$eyes'"
