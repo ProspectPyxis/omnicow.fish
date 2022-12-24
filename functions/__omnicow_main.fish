@@ -39,6 +39,7 @@ function __omnicow_main
     set --query _flag_max_height[1]; or set -l _flag_max_height 0
 
     set -l cowfiles (__omnicow_db_list --max-width $_flag_max_width --max-height $_flag_max_height)
+    or return 1
     if not set --query _flag_no_exclude
         set cowfiles (string match --invert --all --regex (string join '|' $omnicow_exclude_cowfiles) $cowfiles)
     end
