@@ -54,6 +54,13 @@ function __omnicow_main
         set cow_cmd (random choice cowsay cowthink)
     end
 
+    # Pick an eye
+    set -l eyes (random choice 'default' 'oo' '==' 'xx' 'XX' '$$' '@@' '**' '--' 'OO' '..' '^^' 'uu' 'ºº' '00')
+    set -l eye_cmd ""
+    if not set --query _flag_default_eyes; and test $eyes != default
+        set eye_cmd " -e '$eyes'"
+    end
+
     # Moo!
-    eval $cow_cmd -f (random choice $cowfiles) $argv
+    eval $cow_cmd -f (random choice $cowfiles) $eye_cmd $argv
 end
